@@ -47,7 +47,8 @@ jobs:
       - name: "Log in with Azure 🆔"
         uses: azure/login@v2.1.1
         with:
-         creds: '${{ secrets.AZURE_CREDENTIALS }}' 
+         creds: '${{ secrets.AZURE_CREDENTIALS }}'
+         auth-type: 'SERVICE_PRINCIPAL'
 
 #   deploy:
 #     runs-on: ubuntu-latest
