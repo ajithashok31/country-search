@@ -44,11 +44,9 @@ jobs:
           path: ./build-artifacts.zip
           retention-days: 1
     
-      - name: "Log in with Azure 🆔"
-        uses: azure/login@v2.1.1
-        with:
-         creds: '${{ secrets.AZURE_CREDENTIALS }}'
-         auth-type: 'SERVICE_PRINCIPAL'
+      - name: 'Azure login'
+        run: | 
+          az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
 
 #   deploy:
 #     runs-on: ubuntu-latest
