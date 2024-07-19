@@ -44,23 +44,27 @@ jobs:
           path: ./build-artifacts.zip
           retention-days: 1
     
-      - name: 'Azure login'
-        run: | 
-          az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
+      # - name: 'Azure login'
+      #   run: | 
+      #     az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
 
-#   deploy:
-#     runs-on: ubuntu-latest
-#     if: github.ref == 'refs/heads/main'
-#     steps:
-#       - name: "Log in with Azure 🆔"
-#         uses: azure/login@v2.1.0
-#         with:
-#           creds: '${{ secrets.AZURE_CREDENTIALS }}'
+  deploy:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: "Log in with Azure 🆔"
+        uses: azure/login@v2.1.1
+        with:
+          creds: '${{ secrets.AZURE_CREDENTIALS }}'
 
       - name: "Download artifact"
         uses: actions/download-artifact@v4.1.7
         with:
           name: build-artifacts
+      
+      - name: "Display files and folders"
+        run: |
+          ls -la 
       
       - name: "Unzip build artifacts"
         run: unzip -q -o build-artifacts.zip
