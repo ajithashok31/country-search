@@ -36,7 +36,7 @@ jobs:
         working-directory: client
         run: npm test
 
-      - name: 'list all'
+      - name: 'list all folders in the server directory'
         working-directory: server
         run: |
           ls -la 
