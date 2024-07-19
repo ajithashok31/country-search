@@ -51,6 +51,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
+    needs: build-and-test
     steps:
       - name: "Log in with Azure 🆔"
         uses: azure/login@v2.1.1
