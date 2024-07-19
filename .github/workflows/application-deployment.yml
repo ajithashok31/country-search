@@ -22,10 +22,12 @@ jobs:
 
       - name: "Install node dependencies for backend 📦"
         working-directory: server
-        run: npm install 
+        run: 
+          npm install 
+          npm run build
 
       - name: "Install node dependencies for FE and build 📦"
-        working-directory: server
+        working-directory: client
         run: | 
           npm install
           npm run build
