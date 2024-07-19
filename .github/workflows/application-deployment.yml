@@ -36,10 +36,11 @@ jobs:
 
       - name: 'list all'
         working-directory: client
-        run: ls -la 
+        run: |
+          ls -la 
+          ls -la build
 
       - name: "Zip directory for Deployment"
-        working-directory: client
         run: zip -ryq build-artifacts.zip .
 
       - name: "Upload artifact"
@@ -72,6 +73,7 @@ jobs:
           ls -la 
 
       - name: "Zip directory for App Deploy 💼"
+        working-directory: client
         run: zip -r deploy.zip .
 
       - name: "Deploy ZIP to Azure WebApp 🛫"
