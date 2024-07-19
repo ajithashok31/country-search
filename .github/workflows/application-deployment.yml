@@ -40,7 +40,6 @@ jobs:
         working-directory: server
         run: |
           ls -la 
-          ls -la build
 
       - name: "Zip directory for Deployment"
         run: zip -ryq build-artifacts.zip .
