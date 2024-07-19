@@ -63,10 +63,6 @@ jobs:
         with:
           name: build-artifacts
       
-      - name: "Display files and folders"
-        run: |
-          ls -la 
-      
       - name: "Unzip build artifacts"
         run: unzip -q -o build-artifacts.zip
 
