@@ -17,22 +17,22 @@ jobs:
         uses: actions/setup-node@v4.0.2
         with:
           node-version: "18.x"
-          cache: 'yarn'
-          cache-dependency-path: server
+          cache: 'npm'
+          cache-dependency-path: client
 
       - name: "Install node dependencies for backend 📦"
         working-directory: server
-        run: yarn install --frozen-lockile
+        run: npm install 
 
       - name: "Install node dependencies for FE and build 📦"
         working-directory: client
         run: | 
-          yarn install --frozen-lockfile
-          yarn run build
+          npm install
+          npm run build
 
       - name: "Run unit tests 🧪"
         working-directory: client
-        run: yarn run test
+        run: npm test
 
       - name: "Zip directory for Deployment"
         run: zip -ryq build-artifacts.zip .
@@ -44,10 +44,6 @@ jobs:
           path: ./build-artifacts.zip
           retention-days: 1
     
-      # - name: 'Azure login'
-      #   run: | 
-      #     az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
-
   deploy:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
@@ -71,7 +67,7 @@ jobs:
           ls -la 
 
       - name: "Zip directory for App Deploy 💼"
-        working-directory: server
+        working-directory: client
         run: zip -r deploy.zip .
 
       - name: "Deploy ZIP to Azure WebApp 🛫"
@@ -80,4 +76,4 @@ jobs:
         with:
           app-name: "work-experience"
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: server/deploy.zip
+          package: client/deploy.zip
