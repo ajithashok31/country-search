@@ -33,7 +33,7 @@ jobs:
           npm run build
 
       - name: "Run unit tests 🧪"
-        working-directory: server
+        working-directory: client
         run: npm test
 
       - name: 'list all'
